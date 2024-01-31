@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Planet} from "../data/Planet";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {NgIf} from "@angular/common";
@@ -27,7 +27,7 @@ import {MatCheckbox} from "@angular/material/checkbox";
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })
-export class DetailComponent {
+export class DetailComponent implements OnChanges {
   title = 'Select a Planet or create a new one!';
   @Input() selectedContent?: Planet;
   @Input() contentList?: Planet[] = [];
