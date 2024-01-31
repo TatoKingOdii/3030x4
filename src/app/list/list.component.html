@@ -1,0 +1,30 @@
+<div class="content-containers">
+  <div class="content-list">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ title }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngFor="let content of contentList">
+        <mat-action-list disableRipple>
+          <div class="flex-box">
+            <button mat-list-item class="content-item" [ngClass]="{green: content.habitable}" (click)="selectContent(content)">
+              <p matLine>Name: {{content.name}}</p>
+              <p matLine>Composition: {{content.composition}}</p>
+              <p matLine>Color: {{content.color}}</p>
+              <p matLine>Distance From Sun: {{content.distanceFromSun}}</p>
+            </button>
+            <button mat-button color="warn" class="content-item text-center"
+                    (click)="deleteContent(content); $event.stopImmediatePropagation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-action-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <app-detail [selectedContent]="currentContent"
+              [contentList]="contentList"
+              (onContentSave)="handleContentUpdate($event)"/>
+</div>

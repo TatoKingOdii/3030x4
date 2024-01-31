@@ -1,0 +1,49 @@
+<div class="content-details">
+  <mat-card>
+    <mat-card-header>
+            <span *ngIf="localContent.id !== -1; else prompt">
+              <mat-card-title>
+                Currently Editing: {{localContent.name}}
+              </mat-card-title>
+            </span>
+      <ng-template #prompt>
+        <mat-card-title>
+          {{title}}
+        </mat-card-title>
+      </ng-template>
+    </mat-card-header>
+    <form #form="ngForm" (ngSubmit)="saveContent(localContent)">
+      <mat-card-content>
+        <mat-form-field>
+          <span class="spacer"></span>
+          <input matInput name="name" required minlength="1" type="text"
+                 [(ngModel)]="localContent.name" placeholder="Name"/>
+          <span class="spacer"></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="composition" required minlength="1" type="text"
+                 [(ngModel)]="localContent.composition" placeholder="Composition"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="color" required minlength="1" type="text"
+                 [(ngModel)]="localContent.color" placeholder="Color"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="distanceFromSun" required minlength="1" type="number" min="1"
+                 [(ngModel)]="localContent.distanceFromSun" placeholder="Distance from Sun"/>
+        </mat-form-field>
+        <section>
+          <mat-checkbox name="habitable" [(ngModel)]="localContent.habitable">
+            Is it Habitable?
+          </mat-checkbox>
+        </section>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" [disabled]="form.invalid" mat-button color="accent">
+          {{ localContent.id == -1 ? 'Create' : 'Save' }}
+        </button>
+        <button type="button" mat-button (click)="reset()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
